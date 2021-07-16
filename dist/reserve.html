@@ -51,14 +51,60 @@
                                     <input type="text" class="form-control" id="reserve_uniqueID">
                                 </div>
                                 <br><br>
-                                <button type="submit" class="btn btn-info submit">Submit</button>
+                                <button id="reserveBtn" type="submit" class="btn btn-info submit">Submit</button>
                             </form>
                         </div>
                     </div>
                 </div>
+
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
                     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
                     crossorigin="anonymous">
+                </script>
+
+                <script type="text/javascript">
+                    const reserveBtn = document.getElementById('reserveBtn');
+
+                    // Question: What is "e" short for?
+                    addBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+
+                        // Question: What does this code do?
+                        let perName = document.getElementById('reserve_name').value.trim();
+                        let perPhone = document.getElementById('reserve_phone').value.trim();
+                        let perEmail = document.getElementById('reserve_email').value.trim();
+                        let perID = document.getElementById('reserve_uniqueID').value.trim();
+
+                        let newReserve = {
+                            name: perName,
+                            phone: perPhone,
+                            email: perEmail,
+                            uniqueID: perID,
+                        };
+
+                        // Question: What does this code do??
+                        fetch('/api/reserve', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(newReserve),
+                            })
+                            .then((response) => {
+                                if (response.status === 200) {
+                                    alert('You Get A Table!')
+                                } else if (response.status === 201) {
+                                    alert('Waitlisted.')
+                                }
+                                response.json()
+                            })
+                            .then((data) => {
+                                console.log('reserve.html', data);
+                            })
+                            .catch((error) => {
+                                console.error('Error:', error);
+                            });
+                    });
                 </script>
 </body>
 
