@@ -1,0 +1,21 @@
+Create the front end visuals, based on live page basic server file reserve class made to hold data entered
+    Header,
+    Body (2 buttons, unordered list, form)
+
+Create a few array variables that will hold the data
+    filledTables[reservation, reservation, ...] if 5... V
+    waitingList[reservation, reservation, ...]
+
+Reservation Class
+    Cust Name
+    Cust Phone #
+    Cust Email
+    Cust ID
+
+Create a set of routes for getting and posting table data
+    / - Home page
+    /reserve - reservation page
+    /table - current tables page
+    /api/waitlist - show waitlist JSON
+    /api/tables - show filled tables JSON
+
