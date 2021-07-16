@@ -23,6 +23,13 @@ app.get('/tables', (req, res) => res.sendFile(path.join(__dirname, './dist/table
 //      Get Reserve
 app.get('/reservation', (req, res) => res.sendFile(path.join(__dirname, './dist/reserve.html')));
 
+//      API Routes
+//              Tables
+app.get('/api/tables', (req, res) => res.json(tables));
+
+//              Waitlist
+app.get('/api/waitlist', (req, res) => res.json(waitList));
+
 //      Post to Tables
 app.post('/api/reserve', (req, res) => {
 
@@ -30,8 +37,10 @@ app.post('/api/reserve', (req, res) => {
   
     if (tables.length < 5) {
         tables.push(newReservation);
+        res.status(200);
     } else {
         waitList.push(newReservation);
+        res.status(201);
     }
     console.log(tables);
     res.json(newReservation);
